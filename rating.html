@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate Us - Clock App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="rating-container">
+    <h1>Rate Our Clock App</h1>
+    <p>We'd love to hear your feedback!</p>
+    
+    <div class="star-rating">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+    
+    <p>How was your experience?</p>
+    <textarea id="feedback" placeholder="Write your feedback here..." rows="5"></textarea>
+    
+    <button class="submit-btn" onclick="submitRating()">Submit Rating</button>
+    
+    <button class="back-btn"><a href="index.html">Back to Home</a></button>
+  </div>
+
+  <script>
+    let selectedRating = 0;
+    const stars = document.querySelectorAll(".star");
+
+    stars.forEach(star => {
+      star.addEventListener("click", function() {
+        selectedRating = this.getAttribute("data-value");
+        highlightStars(selectedRating);
+      });
+    });
+
+    function highlightStars(rating) {
+      stars.forEach(star => {
+        if (star.getAttribute("data-value") <= rating) {
+          star.style.color = "#FFD700"; // Gold color for selected stars
+        } else {
+          star.style.color = "#ccc"; // Grey color for unselected stars
+        }
+      });
+    }
+
+    function submitRating() {
+      const feedback = document.getElementById("feedback").value;
+      
+      if (selectedRating === 0 || feedback.trim() === "") {
+        alert("Please provide both a rating and feedback.");
+        return;
+      }
+
+      alert(`Thank you for your feedback!\nRating: ${selectedRating} stars\nFeedback: ${feedback}`);
+      // Here, you could send the rating and feedback to a server if needed.
+    }
+  </script>
+  <link rel="stylesheet" href="rate.css">
+</body>
+</html>
